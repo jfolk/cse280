@@ -49,6 +49,8 @@ def sequenceToNumber(sequence, k):
 	return referenceArray
 
 
+validBasePairs = ['A', 'a', 'C', 'c', 'G', 'g', 'T', 't']
+
 filepath = 'hpv68'
 viralSequence = None
 with open(filepath) as fp:
@@ -56,6 +58,20 @@ with open(filepath) as fp:
 		line = line.strip()
 		viralSequence = sequenceToNumber(line, 15)
 
-print(viralSequence)
+
+genomeFilepath = "../projectSequences/HumanGenome/chr11.fa"
+humanStringSequence = ""
+humanSequence = None
+with open(genomeFilepath) as fp:
+	for line in fp:
+		line = line.strip()
+		for char in line:
+			if char in validBasePairs:
+				humanStringSequence += char.upper()
+	humanSequence = sequenceToNumber(humanStringSequence, 15)
+
+print(humanSequence)
+
+
 
 # print(sequenceToNumber('AGTAGTTTTT', 3))

@@ -49,6 +49,28 @@ def sequenceToNumber(sequence, k):
 	return referenceArray
 
 
+def predictHybridRead(filepath, k, viralSequence, humanSequence):
+	hybridReads = []
+	with open(filepath) as fp:
+		for line in fp:
+			if not line.startswith('@') or not line.startswith("+") or not line[0].isdigit():
+				sequence = line.strip()
+				sequenceDict = sequenceToNumber(sequence, k)
+
+				for key, value in sequenceDict.items():
+					if key in viralSequence and key in humanSequence:
+						x = 1
+					elif key in viralSequence:
+						x = 1
+					elif key in humanSequence:
+						x = 1
+					else:
+						x = 1
+
+
+
+
+
 validBasePairs = ['A', 'a', 'C', 'c', 'G', 'g', 'T', 't']
 
 filepath = 'hpv68'
@@ -71,6 +93,18 @@ with open(genomeFilepath) as fp:
 	humanSequence = sequenceToNumber(humanStringSequence, 15)
 
 print(humanSequence)
+
+
+
+
+#paired end reads coming from 5' to 3' from left -> right
+readFile1 = '../HumanGenome/read.bwa.read1.fastq'
+with open(readFile1) as fp:
+	for line in fp:
+		if line.startswith('@chr'):
+			readHeaders = line.split("_")
+			readEnd1 = readHeaders[1]
+			readEnd2 = readHeaders[2]
 
 
 
